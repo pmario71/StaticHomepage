@@ -12,26 +12,6 @@ namespace BlazorApp.Api
 {
     public static class WeatherForecastFunction
     {
-        private static string GetSummary(int temp)
-        {
-            var summary = "Mild";
-
-            if (temp >= 32)
-            {
-                summary = "Hot";
-            }
-            else if (temp <= 16 && temp > 0)
-            {
-                summary = "Cold";
-            }
-            else if (temp <= 0)
-            {
-                summary = "Freezing";
-            }
-
-            return summary;
-        }
-
         [FunctionName("WeatherForecast")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
@@ -48,6 +28,26 @@ namespace BlazorApp.Api
             }).ToArray();
 
             return new OkObjectResult(result);
+        }
+
+        private static string GetSummary(int temp)
+        {
+            var summary = "Mild (p)";
+
+            if (temp >= 32)
+            {
+                summary = "Hot (p)";
+            }
+            else if (temp <= 16 && temp > 0)
+            {
+                summary = "Cold (p)";
+            }
+            else if (temp <= 0)
+            {
+                summary = "Freezing (p)";
+            }
+
+            return summary;
         }
     }
 }
